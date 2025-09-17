@@ -36,9 +36,26 @@ body {
 	font-family: 'Courier New', monospace;
 	background-color: #ffffff;
 	color: #000000;
+	margin: 1rem;
+	padding: 0;
+}
+
+/* Site-wide container margin */
+.wp-site-blocks {
+	margin: 1rem;
+	max-width: calc(100vw - 2rem);
+}
+
+/* Ensure full-width elements respect site margin */
+.alignfull {
+	width: calc(100vw - 2rem);
+	max-width: calc(100vw - 2rem);
+	margin-left: 0;
+	margin-right: 0;
 }
 
 /* Default NeoBrutalism styling - Shadows only when not overridden by editor */
+.wp-block-group:not([style*="box-shadow"]),
 .wp-block-heading:not([style*="box-shadow"]),
 .wp-block-quote:not([style*="box-shadow"]),
 .wp-block-image:not([style*="box-shadow"]),
@@ -72,6 +89,7 @@ body {
 }
 
 /* Base styling for all blocks (borders, padding, etc.) regardless of shadow settings */
+.wp-block-group,
 .wp-block-heading,
 .wp-block-quote,
 .wp-block-image,
@@ -98,7 +116,7 @@ body {
 	/* Base NeoBrutalism styling - always applied */
 	border: 4px solid #000000;
 	padding: 2rem;
-	margin: 0;
+	margin-bottom: 2rem;
 	background: #ffffff;
 	color: #000000;
 }
@@ -501,6 +519,21 @@ img {
 
 /* Mobile-first responsive breakpoints */
 @media (max-width: 768px) {
+	/* Smaller site margin on mobile */
+	body {
+		margin: 0.5rem;
+	}
+	
+	.wp-site-blocks {
+		margin: 0.5rem;
+		max-width: calc(100vw - 1rem);
+	}
+	
+	.alignfull {
+		width: calc(100vw - 1rem);
+		max-width: calc(100vw - 1rem);
+	}
+	
 	/* Wide layout mobile adjustments */
 	.alignfull.is-style-highlight,
 	.alignfull.is-style-alert,
@@ -722,7 +755,6 @@ img {
 }
 
 /* Clean content blocks - No NeoBrutalism styling by default */
-.wp-block-group,
 .wp-block-column,
 .wp-block-paragraph,
 .wp-block-list,
@@ -787,6 +819,75 @@ img {
 	grid-template-columns: 1fr 1fr;
 	gap: 2rem;
 	align-items: center;
+}
+
+/* Professional block spacing and padding */
+
+/* Major container blocks - Extra spacing */
+.wp-block-group {
+	margin-bottom: 2.5rem;
+}
+
+/* Heading hierarchy spacing */
+.wp-block-heading {
+	margin-bottom: 1.5rem;
+	padding: 1.5rem;
+}
+
+/* Quote blocks - Generous spacing */
+.wp-block-quote,
+.wp-block-pullquote {
+	margin-bottom: 2rem;
+	padding: 2rem;
+}
+
+/* Media blocks - Moderate spacing */
+.wp-block-image,
+.wp-block-video,
+.wp-block-audio,
+.wp-block-embed {
+	margin-bottom: 2rem;
+	padding: 1rem;
+}
+
+/* Interactive blocks - Comfortable spacing */
+.wp-block-search,
+.wp-block-social-links,
+.wp-block-calendar {
+	margin-bottom: 1.5rem;
+	padding: 1.5rem;
+}
+
+/* Content blocks - Readable spacing */
+.wp-block-code,
+.wp-block-preformatted,
+.wp-block-verse {
+	margin-bottom: 1.5rem;
+	padding: 1.5rem;
+	font-family: 'Courier New', monospace;
+}
+
+/* Navigation - Header/footer spacing */
+.wp-block-navigation {
+	margin-bottom: 1rem;
+	padding: 1rem 2rem;
+}
+
+/* Separator spacing */
+.wp-block-separator {
+	margin: 3rem 0;
+	padding: 0;
+}
+
+/* Widget blocks - Compact spacing */
+.wp-block-tag-cloud,
+.wp-block-categories,
+.wp-block-archives,
+.wp-block-latest-posts,
+.wp-block-latest-comments,
+.wp-block-rss {
+	margin-bottom: 1.5rem;
+	padding: 1.5rem;
 }
 
 /* Border radius now customizable via WordPress editor */
