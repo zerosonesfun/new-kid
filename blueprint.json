@@ -1,0 +1,30 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "features": {
+    "networking": true
+  },
+  "preferredVersions": {
+    "php": "8.0",
+    "wp": "latest"
+  },
+  "steps": [
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "url",
+        "url": "https://github-proxy.com/proxy/?repo=zerosonesfun/new-kid&branch=main"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "Billy Wilcosky",
+        "blogdescription": "WordPress Block Theme Developer"
+      }
+    }
+  ]
+}
