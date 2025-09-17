@@ -46,12 +46,13 @@ body {
 	max-width: calc(100vw - 2rem);
 }
 
-/* Ensure full-width elements respect site margin */
+/* Fix alignfull elements to not overflow screen */
 .alignfull {
 	width: calc(100vw - 2rem);
 	max-width: calc(100vw - 2rem);
-	margin-left: 0;
-	margin-right: 0;
+	margin-left: calc(-1rem);
+	margin-right: calc(-1rem);
+	box-sizing: border-box;
 }
 
 /* Default NeoBrutalism styling - Shadows only when not overridden by editor */
@@ -65,7 +66,6 @@ body {
 .wp-block-preformatted:not([style*="box-shadow"]),
 .wp-block-verse:not([style*="box-shadow"]),
 .wp-block-pullquote:not([style*="box-shadow"]),
-.wp-block-separator:not([style*="box-shadow"]),
 .wp-block-embed:not([style*="box-shadow"]),
 .wp-block-video:not([style*="box-shadow"]),
 .wp-block-audio:not([style*="box-shadow"]),
@@ -99,7 +99,6 @@ body {
 .wp-block-preformatted,
 .wp-block-verse,
 .wp-block-pullquote,
-.wp-block-separator,
 .wp-block-embed,
 .wp-block-video,
 .wp-block-audio,
@@ -532,6 +531,8 @@ img {
 	.alignfull {
 		width: calc(100vw - 1rem);
 		max-width: calc(100vw - 1rem);
+		margin-left: calc(-0.5rem);
+		margin-right: calc(-0.5rem);
 	}
 	
 	/* Wide layout mobile adjustments */
@@ -779,6 +780,44 @@ footer {
 	background: transparent !important;
 }
 
+/* Spacer and Separator blocks - WordPress 2025 defaults, no NeoBrutalism */
+.wp-block-spacer {
+	border: none !important;
+	box-shadow: none !important;
+	background: transparent !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.wp-block-separator {
+	border: none !important;
+	box-shadow: none !important;
+	background: transparent !important;
+	padding: 0 !important;
+	margin: 2rem 0 !important;
+	border-top: 2px solid #ddd !important;
+	height: 0 !important;
+	width: 100% !important;
+}
+
+.wp-block-separator.is-style-wide {
+	border-top: 2px solid #ddd !important;
+	margin: 3rem 0 !important;
+}
+
+.wp-block-separator.is-style-dots {
+	border: none !important;
+	text-align: center !important;
+	line-height: 1 !important;
+}
+
+.wp-block-separator.is-style-dots::before {
+	content: "···" !important;
+	color: #ddd !important;
+	font-size: 1.5rem !important;
+	letter-spacing: 2rem !important;
+}
+
 /* List specific styling */
 .wp-block-list {
 	margin-left: 2rem;
@@ -836,7 +875,7 @@ footer {
 
 /* Major container blocks - Extra spacing */
 .wp-block-group {
-	margin-bottom: 2.5rem;
+	margin-bottom: 1.5rem !important;
 }
 
 /* Heading hierarchy spacing */
