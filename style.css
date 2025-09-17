@@ -39,17 +39,11 @@ body {
 }
 
 /* Default NeoBrutalism styling - Shadows only when not overridden by editor */
-.wp-block-group:not([style*="box-shadow"]),
-.wp-block-column:not([style*="box-shadow"]),
 .wp-block-heading:not([style*="box-shadow"]),
 .wp-block-quote:not([style*="box-shadow"]),
 .wp-block-image:not([style*="box-shadow"]),
 .wp-block-navigation:not([style*="box-shadow"]),
-.wp-block-list:not([style*="box-shadow"]),
 .wp-block-cover:not([style*="box-shadow"]),
-.wp-block-media-text:not([style*="box-shadow"]),
-.wp-block-gallery:not([style*="box-shadow"]),
-.wp-block-table:not([style*="box-shadow"]),
 .wp-block-code:not([style*="box-shadow"]),
 .wp-block-preformatted:not([style*="box-shadow"]),
 .wp-block-verse:not([style*="box-shadow"]),
@@ -78,17 +72,11 @@ body {
 }
 
 /* Base styling for all blocks (borders, padding, etc.) regardless of shadow settings */
-.wp-block-group,
-.wp-block-column,
 .wp-block-heading,
 .wp-block-quote,
 .wp-block-image,
 .wp-block-navigation,
-.wp-block-list,
 .wp-block-cover,
-.wp-block-media-text,
-.wp-block-gallery,
-.wp-block-table,
 .wp-block-code,
 .wp-block-preformatted,
 .wp-block-verse,
@@ -523,13 +511,10 @@ img {
 	}
 	
 	/* All NeoBrutalism blocks - Reduced padding on mobile */
-	.wp-block-group,
-	.wp-block-column,
 	.wp-block-heading,
 	.wp-block-quote,
 	.wp-block-image,
 	.wp-block-navigation,
-	.wp-block-list,
 	.wp-block-cover,
 	.wp-block-media-text,
 	.wp-block-gallery,
@@ -556,13 +541,10 @@ img {
 	}
 	
 	/* Reduce border width on mobile for better proportions */
-	.wp-block-group,
-	.wp-block-column,
 	.wp-block-heading,
 	.wp-block-quote,
 	.wp-block-image,
 	.wp-block-navigation,
-	.wp-block-list,
 	.wp-block-cover,
 	.wp-block-media-text,
 	.wp-block-gallery,
@@ -589,8 +571,6 @@ img {
 	}
 	
 	/* Scale down shadows on mobile */
-	.wp-block-group:not([style*="box-shadow"]),
-	.wp-block-column:not([style*="box-shadow"]),
 	.wp-block-heading:not([style*="box-shadow"]),
 	.wp-block-quote:not([style*="box-shadow"]),
 	.wp-block-image:not([style*="box-shadow"]),
@@ -739,6 +719,74 @@ img {
 	.wp-block-rss:not([style*="box-shadow"]) {
 		box-shadow: 10px 10px 0 #000000;
 	}
+}
+
+/* Clean content blocks - No NeoBrutalism styling by default */
+.wp-block-group,
+.wp-block-column,
+.wp-block-paragraph,
+.wp-block-list,
+.wp-block-table,
+.wp-block-gallery,
+.wp-block-media-text {
+	border: none;
+	box-shadow: none;
+	padding: 0;
+	margin-bottom: 1.5rem;
+	background: transparent;
+}
+
+/* List specific styling */
+.wp-block-list {
+	margin-left: 2rem;
+}
+
+/* Paragraph specific styling */
+.wp-block-paragraph {
+	line-height: 1.6;
+}
+
+/* Table specific clean styling */
+.wp-block-table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.wp-block-table table {
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+}
+
+.wp-block-table th,
+.wp-block-table td {
+	border: 1px solid #ddd;
+	padding: 0.75rem;
+	text-align: left;
+}
+
+.wp-block-table th {
+	background-color: #f5f5f5;
+	font-weight: bold;
+}
+
+/* Gallery specific clean styling */
+.wp-block-gallery {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.wp-block-gallery .wp-block-image {
+	border: none;
+	box-shadow: none;
+}
+
+/* Media-text specific clean styling */
+.wp-block-media-text {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+	align-items: center;
 }
 
 /* Border radius now customizable via WordPress editor */
