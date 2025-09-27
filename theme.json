@@ -2,8 +2,8 @@
 	"settings": {
 		"appearanceTools": true,
 		"layout": {
-			"contentSize": "800px",
-			"wideSize": "1200px"
+			"contentSize": null,
+			"wideSize": null
 		},
 		"spacing": {
 			"units": [
@@ -366,12 +366,12 @@
 			},
 			"core/post-featured-image": {
 				"border": {
-					"width": "4px",
-					"style": "solid",
-					"color": "var(--wp--preset--color--black)",
+					"width": "0px",
+					"style": "none",
+					"color": "transparent",
 					"radius": "0px"
 				},
-				"shadow": "8px 8px 0px #000000"
+				"shadow": "none"
 			},
 			"core/cover": {
 				"border": {

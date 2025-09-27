@@ -97,7 +97,34 @@ The theme includes a carefully curated color palette inspired by NeoBrutalism:
 * Google Fonts integration
 * Responsive design
 * Performance optimizations
+* Accessibility improvements (WCAG 2.1 AA compliant)
+* Dark mode support
+* Skip links and keyboard navigation
+* ARIA labels and semantic HTML
 
+== Privacy Policy ==
+
+This theme does not collect, store, or transmit any personal data from users. The theme only includes:
+
+* Google Fonts loaded from fonts.googleapis.com (user consent required)
+* Local CSS and JavaScript files
+* No tracking, analytics, or data collection
+
+Users can disable Google Fonts by removing the font enqueue in functions.php if they prefer not to use external resources.
+
+== Resources ==
+
+**Fonts:**
+* Stint Ultra Expanded - Google Fonts (SIL Open Font License)
+* Lexend Mega - Google Fonts (SIL Open Font License)  
+* Proza Libre - Google Fonts (SIL Open Font License)
+* Public Sans - Google Fonts (SIL Open Font License)
+
+**CSS Framework:**
+* NeoBrutalismCSS - Local version included (MIT License)
+
+**Icons:**
+* No external icon libraries used
 
 == Copyright ==
 

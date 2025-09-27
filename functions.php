@@ -177,10 +177,101 @@ function new_kid_theme_support() {
     // Add support for custom spacing
     add_theme_support('custom-spacing');
     
+    // Add accessibility features
+    add_theme_support('html5', array(
+        'search-form',
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'caption',
+        'script',
+        'style'
+    ));
+    
+    // Add support for title tag
+    add_theme_support('title-tag');
+    
+    // Add support for post thumbnails
+    add_theme_support('post-thumbnails');
+    
+    // Add support for automatic feed links
+    add_theme_support('automatic-feed-links');
+    
+    // Add support for navigation menus
+    add_theme_support('menus');
+    
+    // Register navigation menu locations
+    register_nav_menus(array(
+        'primary' => __('Primary Menu', 'new-kid'),
+    ));
+    
     // Make theme available for translation
     load_theme_textdomain('new-kid', get_template_directory() . '/languages');
 }
 add_action('after_setup_theme', 'new_kid_theme_support');
+
+/**
+ * Create default navigation menu on theme activation
+ */
+function new_kid_create_default_menu() {
+    // Check if a menu already exists
+    $menu_exists = wp_get_nav_menu_object('Primary Menu');
+    
+    if (!$menu_exists) {
+        // Create the menu
+        $menu_id = wp_create_nav_menu('Primary Menu');
+        
+        // Add default menu items
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => __('Home', 'new-kid'),
+            'menu-item-url' => home_url('/'),
+            'menu-item-status' => 'publish'
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => __('About', 'new-kid'),
+            'menu-item-url' => home_url('/about/'),
+            'menu-item-status' => 'publish'
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => __('Blog', 'new-kid'),
+            'menu-item-url' => home_url('/blog/'),
+            'menu-item-status' => 'publish'
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => __('Contact', 'new-kid'),
+            'menu-item-url' => home_url('/contact/'),
+            'menu-item-status' => 'publish'
+        ));
+        
+        // Assign the menu to the primary location
+        $locations = get_theme_mod('nav_menu_locations');
+        $locations['primary'] = $menu_id;
+        set_theme_mod('nav_menu_locations', $locations);
+    }
+}
+add_action('after_switch_theme', 'new_kid_create_default_menu');
+
+
+/**
+ * Add accessibility improvements to WordPress
+ */
+function new_kid_accessibility_improvements() {
+    // Add skip link to admin bar
+    if (is_admin_bar_showing()) {
+        echo '<style>
+            #wpadminbar { 
+                position: fixed !important; 
+            }
+            .skip-link { 
+                z-index: 999999; 
+            }
+        </style>';
+    }
+}
+add_action('wp_head', 'new_kid_accessibility_improvements');
 
 /**
  * Register block patterns for translatable content
@@ -251,8 +342,8 @@ function new_kid_register_hero_patterns() {
             'title'       => __('NeoBrutalism Hero', 'new-kid'),
             'description' => __('Bold hero section with large typography, call-to-action buttons, and NeoBrutalism styling', 'new-kid'),
             'categories'  => array('featured', 'header'),
-            'content'     => '<!-- wp:group {"align":"full","className":"is-style-alert","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull is-style-alert"><!-- wp:heading {"textAlign":"center","level":1,"fontSize":"huge"} -->
+            'content'     => '<!-- wp:group {"className":"is-style-alert","layout":{"type":"constrained"}} -->
+<div class="wp-block-group is-style-alert"><!-- wp:heading {"textAlign":"center","level":1,"fontSize":"huge"} -->
 <h1 class="wp-block-heading has-text-align-center has-huge-font-size">' . esc_html__('BOLD & BRUTAL', 'new-kid') . '</h1>
 <!-- /wp:heading -->
 
@@ -271,8 +362,8 @@ function new_kid_register_hero_patterns() {
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"align":"full","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull"><!-- wp:columns -->
+<!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column {"className":"is-style-highlight"} -->
 <div class="wp-block-column is-style-highlight"><!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">' . esc_html__('STAND OUT', 'new-kid') . '</h3>
@@ -314,8 +405,8 @@ function new_kid_register_hero_patterns() {
             'title'       => __('NeoBrutalism Call-to-Action', 'new-kid'),
             'description' => __('Attention-grabbing CTA section with bold messaging and action buttons', 'new-kid'),
             'categories'  => array('call-to-action'),
-            'content'     => '<!-- wp:group {"align":"full","className":"is-style-success","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull is-style-success"><!-- wp:heading {"textAlign":"center","level":2,"fontSize":"huge"} -->
+            'content'     => '<!-- wp:group {"className":"is-style-success","layout":{"type":"constrained"}} -->
+<div class="wp-block-group is-style-success"><!-- wp:heading {"textAlign":"center","level":2,"fontSize":"huge"} -->
 <h2 class="wp-block-heading has-text-align-center has-huge-font-size">' . esc_html__('READY TO GO BRUTAL?', 'new-kid') . '</h2>
 <!-- /wp:heading -->
 
@@ -449,6 +540,25 @@ function new_kid_enqueue_scripts() {
     );
 }
 add_action('wp_enqueue_scripts', 'new_kid_enqueue_scripts');
+
+/**
+ * Enqueue block editor scripts
+ */
+function new_kid_enqueue_block_editor_scripts() {
+    $js_file = get_template_directory() . '/assets/js/theme.js';
+    $js_version = file_exists($js_file) ? filemtime($js_file) : wp_get_theme()->get('Version');
+    
+    wp_enqueue_script(
+        'new-kid-block-editor',
+        get_template_directory_uri() . '/assets/js/theme.js',
+        array('wp-blocks', 'wp-hooks'),
+        $js_version,
+        true
+    );
+}
+add_action('enqueue_block_editor_assets', 'new_kid_enqueue_block_editor_scripts');
+
+
 
 /**
  * Enqueue editor styles for the block editor

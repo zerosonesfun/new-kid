@@ -3,7 +3,7 @@ Theme Name: New Kid
 Theme URI: https://wilcosky.com/new-kid
 Author: Billy Wilcosky
 Author URI: https://wilcosky.com
-Description: New Kid with blocks, let's rock! Now with NeoBrutalism styling.
+Description: New Kid with blocks, let's rock! A NeoBrutalism block theme.
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 5.7
@@ -11,7 +11,7 @@ Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: new-kid
-Tags: neo-brutalism, bold, colorful, modern, full-site-editing
+Tags: full-site-editing, block-theme, accessibility-ready, custom-colors, custom-spacing, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready, wide-blocks
 */
 
 /* Import NeoBrutalismCSS - Local version for reliability and performance */
@@ -22,20 +22,81 @@ Tags: neo-brutalism, bold, colorful, modern, full-site-editing
  * High specificity selectors without !important - respects all WordPress editor controls
  */
 
-/* NeoBrutalism CSS Custom Properties for Link Customization */
+/* NeoBrutalism CSS Custom Properties for Link Customization and Dark Mode */
 :root {
 	/* Link underline customization variables */
 	--neo-link-underline-color: var(--wp--preset--color--bright-red, #ff0000);
 	--neo-link-underline-thickness: 3px;
 	--neo-nav-link-underline-thickness: 2px;
 	--neo-link-underline-style: solid;
+	
+	/* Light mode color scheme (default) */
+	--neo-bg-primary: #ffffff;
+	--neo-bg-secondary: #f5f5f5;
+	--neo-text-primary: #000000;
+	--neo-text-secondary: #333333;
+	--neo-border-primary: #000000;
+	--neo-shadow-primary: #000000;
+	
+	/* NeoBrutalism color variants for light mode */
+	--neo-highlight-bg: #fdfd96;
+	--neo-alert-bg: #ff5733;
+	--neo-success-bg: #40d39c;
+	--neo-code-bg: #000000;
+	--neo-code-text: #40d39c;
+	
+	/* Accessibility focus indicators */
+	--neo-focus-color: #0066cc;
+	--neo-focus-outline: 3px solid var(--neo-focus-color);
+	--neo-focus-offset: 2px;
+}
+
+/* Dark mode color scheme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* Dark mode color scheme */
+		--neo-bg-primary: #1a1a1a;
+		--neo-bg-secondary: #2a2a2a;
+		--neo-text-primary: #ffffff;
+		--neo-text-secondary: #cccccc;
+		--neo-border-primary: #ffffff;
+		--neo-shadow-primary: #ffffff;
+		
+		/* NeoBrutalism color variants for dark mode */
+		--neo-highlight-bg: #4a4a00;
+		--neo-alert-bg: #cc3300;
+		--neo-success-bg: #00aa66;
+		--neo-code-bg: #ffffff;
+		--neo-code-text: #00aa66;
+		
+		/* Dark mode focus indicators */
+		--neo-focus-color: #66b3ff;
+	}
+}
+
+/* Skip Links for Keyboard Navigation */
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	z-index: 999999;
+	text-decoration: none;
+	background: var(--neo-focus-color);
+	color: var(--neo-bg-primary);
+	padding: 8px 16px;
+	border: 2px solid var(--neo-border-primary);
+	font-weight: bold;
+}
+
+.skip-link:focus {
+	left: 6px;
+	top: 7px;
 }
 
 /* Ensure NeoBrutalism styles work with FSE */
 body {
 	font-family: 'Courier New', monospace;
-	background-color: #ffffff;
-	color: #000000;
+	background-color: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
 	margin: 1rem;
 	padding: 0;
 }
@@ -46,14 +107,7 @@ body {
 	max-width: calc(100vw - 2rem);
 }
 
-/* Fix alignfull elements to not overflow screen */
-.alignfull {
-	width: calc(100vw - 2rem);
-	max-width: calc(100vw - 2rem);
-	margin-left: calc(-1rem);
-	margin-right: calc(-1rem);
-	box-sizing: border-box;
-}
+/* Note: alignfull class removed from theme to prevent overflow issues */
 
 /* Default NeoBrutalism styling - Shadows only when not overridden by editor */
 .wp-block-group:not([style*="box-shadow"]),
@@ -80,12 +134,12 @@ body {
 .wp-block-latest-comments:not([style*="box-shadow"]),
 .wp-block-rss:not([style*="box-shadow"]) {
 	/* NeoBrutalism defaults - shadows only when not set by editor */
-	border: 4px solid #000000;
-	box-shadow: 8px 8px 0 #000000;
+	border: 4px solid var(--neo-border-primary);
+	box-shadow: 8px 8px 0 var(--neo-shadow-primary);
 	padding: 2rem;
 	margin: 0;
-	background: #ffffff;
-	color: #000000;
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
 }
 
 /* Base styling for all blocks (borders, padding, etc.) regardless of shadow settings */
@@ -113,29 +167,29 @@ body {
 .wp-block-latest-comments,
 .wp-block-rss {
 	/* Base NeoBrutalism styling - always applied */
-	border: 4px solid #000000;
+	border: 4px solid var(--neo-border-primary);
 	padding: 2rem;
 	margin-bottom: 2rem;
-	background: #ffffff;
-	color: #000000;
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
 }
 
 /* Default button styling - Shadow only when not overridden by editor */
 .wp-block-button:not([style*="box-shadow"]) .wp-block-button__link {
-	box-shadow: 8px 8px 0 #000000;
+	box-shadow: 8px 8px 0 var(--neo-shadow-primary);
 }
 
 /* Base button styling - Always applied */
 .wp-block-button .wp-block-button__link {
-	border: 4px solid #000000;
+	border: 4px solid var(--neo-border-primary);
 	font-family: Impact, 'Arial Black', sans-serif;
 	font-weight: 900;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	padding: 1rem 2rem;
 	transition: all 0.1s ease;
-	background: #ffffff;
-	color: #000000;
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
 	display: inline-block;
 	margin: 0;
 }
@@ -146,56 +200,56 @@ body {
 .wp-site-blocks [style*="border-width: 1px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width:1px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width: 1px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 2px 2px 0 #000000; 
+    box-shadow: 2px 2px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-width:2px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-width: 2px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width:2px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width: 2px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 4px 4px 0 #000000; 
+    box-shadow: 4px 4px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-width:3px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-width: 3px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width:3px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width: 3px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 6px 6px 0 #000000; 
+    box-shadow: 6px 6px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-width:4px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-width: 4px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width:4px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width: 4px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 8px 8px 0 #000000; 
+    box-shadow: 8px 8px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-width:5px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-width: 5px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width:5px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width: 5px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 10px 10px 0 #000000; 
+    box-shadow: 10px 10px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-width:6px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-width: 6px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width:6px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width: 6px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 12px 12px 0 #000000; 
+    box-shadow: 12px 12px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-width:8px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-width: 8px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width:8px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width: 8px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 16px 16px 0 #000000; 
+    box-shadow: 16px 16px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-width:10px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-width: 10px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width:10px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-width: 10px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 20px 20px 0 #000000; 
+    box-shadow: 20px 20px 0 var(--neo-shadow-primary); 
 }
 
 /* Dynamic border radius scaling - High specificity without !important */
@@ -205,28 +259,28 @@ body {
 .wp-site-blocks [style*="border-radius: 5px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius:5px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius: 5px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 8px 8px 0 #000000; 
+    box-shadow: 8px 8px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-radius:10px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-radius: 10px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius:10px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius: 10px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 8px 8px 0 #000000; 
+    box-shadow: 8px 8px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-radius:20px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-radius: 20px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius:20px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius: 20px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 8px 8px 0 #000000; 
+    box-shadow: 8px 8px 0 var(--neo-shadow-primary); 
 }
 
 .wp-site-blocks [style*="border-radius:30px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .wp-site-blocks [style*="border-radius: 30px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius:30px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius: 30px"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 8px 8px 0 #000000; 
+    box-shadow: 8px 8px 0 var(--neo-shadow-primary); 
 }
 
 /* Percentage border radius support */
@@ -234,7 +288,7 @@ body {
 .wp-site-blocks [style*="border-radius: 50%"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius:50%"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]),
 .editor-styles-wrapper [style*="border-radius: 50%"]:not([style*="box-shadow:none"]):not([style*="box-shadow: none"]) { 
-    box-shadow: 8px 8px 0 #000000; 
+    box-shadow: 8px 8px 0 var(--neo-shadow-primary); 
 }
 
 /* Custom Style Defaults - All customizable via editor */
@@ -271,8 +325,8 @@ body {
 .wp-block-latest-posts.is-style-highlight,
 .wp-block-latest-comments.is-style-highlight,
 .wp-block-rss.is-style-highlight {
-	background: #fdfd96;
-	color: #000000;
+	background: var(--neo-highlight-bg);
+	color: var(--neo-text-primary);
 }
 
 /* Alert Style - Default orange */
@@ -307,8 +361,8 @@ body {
 .wp-block-latest-posts.is-style-alert,
 .wp-block-latest-comments.is-style-alert,
 .wp-block-rss.is-style-alert {
-	background: #ff5733;
-	color: #ffffff;
+	background: var(--neo-alert-bg);
+	color: var(--neo-text-primary);
 	font-family: 'Lexend Mega', Impact, 'Arial Black', sans-serif;
 	font-weight: 900;
 	text-transform: uppercase;
@@ -346,29 +400,29 @@ body {
 .wp-block-latest-posts.is-style-success,
 .wp-block-latest-comments.is-style-success,
 .wp-block-rss.is-style-success {
-	background: #40d39c;
-	color: #000000;
+	background: var(--neo-success-bg);
+	color: var(--neo-text-primary);
 	font-family: 'Proza Libre', 'Courier New', monospace;
 	font-weight: 600;
 }
 
 /* Button styles - Customizable */
 .wp-block-button.is-style-highlight .wp-block-button__link {
-	background: #fdfd96;
-	color: #000000;
+	background: var(--neo-highlight-bg);
+	color: var(--neo-text-primary);
 }
 
 .wp-block-button.is-style-alert .wp-block-button__link {
-	background: #ff5733;
-	color: #ffffff;
+	background: var(--neo-alert-bg);
+	color: var(--neo-text-primary);
 	font-family: 'Lexend Mega', Impact, 'Arial Black', sans-serif;
 	font-weight: 900;
 	text-transform: uppercase;
 }
 
 .wp-block-button.is-style-success .wp-block-button__link {
-	background: #40d39c;
-	color: #000000;
+	background: var(--neo-success-bg);
+	color: var(--neo-text-primary);
 	font-family: 'Proza Libre', 'Courier New', monospace;
 	font-weight: 600;
 }
@@ -379,13 +433,13 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 900;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	color: #000000;
+	color: var(--neo-text-primary);
 }
 
 p {
 	font-family: 'Courier New', monospace;
 	line-height: 1.6;
-	color: #000000;
+	color: var(--neo-text-primary);
 }
 
 /* Link styling - Separate control for text color and underline */
@@ -463,26 +517,27 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-	border: 3px solid #000000;
-	box-shadow: 4px 4px 0 #000000;
+	border: 3px solid var(--neo-border-primary);
+	box-shadow: 4px 4px 0 var(--neo-shadow-primary);
 	font-family: 'Courier New', monospace;
 	font-weight: bold;
-	background: #ffffff;
-	color: #000000;
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
 	padding: 12px;
 }
 
 input:focus,
 textarea:focus {
-	outline: none;
+	outline: var(--neo-focus-outline);
+	outline-offset: var(--neo-focus-offset);
 	box-shadow: 4px 4px 0 #ff0000;
 	border-color: #ff0000;
 }
 
 /* Images */
 img {
-	border: 4px solid #000000;
-	box-shadow: 8px 8px 0 #000000;
+	border: 4px solid var(--neo-border-primary);
+	box-shadow: 8px 8px 0 var(--neo-shadow-primary);
 }
 
 /* Paragraph blocks - Clean by default, NeoBrutalism available via block styles */
@@ -491,28 +546,11 @@ img {
 	line-height: 1.6;
 }
 
-/* Wide layout support for posts and pages */
-.alignfull {
-	width: 100vw;
-	max-width: none;
-	margin-left: calc(50% - 50vw);
-	margin-right: calc(50% - 50vw);
-}
+/* Wide layout support for posts and pages - handled above */
 
-/* Ensure wide layouts work properly with NeoBrutalism styling */
-.alignfull.is-style-highlight,
-.alignfull.is-style-alert,
-.alignfull.is-style-success,
-.alignfull.is-style-default {
-	padding-left: 2rem;
-	padding-right: 2rem;
-}
+/* Note: alignfull styles removed to prevent overflow issues */
 
-/* Wide layout content spacing */
-.alignfull .wp-block-post-content {
-	max-width: none;
-	width: 100%;
-}
+/* Note: alignfull content spacing removed */
 
 /* Comprehensive Responsive Design */
 
@@ -528,21 +566,9 @@ img {
 		max-width: calc(100vw - 1rem);
 	}
 	
-	.alignfull {
-		width: calc(100vw - 1rem);
-		max-width: calc(100vw - 1rem);
-		margin-left: calc(-0.5rem);
-		margin-right: calc(-0.5rem);
-	}
+	/* Note: alignfull mobile styles removed */
 	
-	/* Wide layout mobile adjustments */
-	.alignfull.is-style-highlight,
-	.alignfull.is-style-alert,
-	.alignfull.is-style-success,
-	.alignfull.is-style-default {
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
+	/* Note: alignfull mobile adjustments removed */
 	
 	/* All NeoBrutalism blocks - Reduced padding on mobile */
 	.wp-block-heading,
@@ -572,6 +598,59 @@ img {
 	.wp-block-latest-comments,
 	.wp-block-rss {
 		padding: 1rem !important;
+	}
+	
+	/* Mobile navigation adjustments */
+	.wp-block-navigation {
+		flex-wrap: wrap;
+		width: 100%;
+		max-width: 100%;
+	}
+	
+	.wp-block-navigation__responsive-container-open {
+		display: block;
+	}
+	
+	/* Note: alignfull header adjustments removed */
+	
+	/* Ensure site title and navigation don't overflow */
+	.wp-block-site-title {
+		flex-shrink: 1;
+		min-width: 0;
+		word-wrap: break-word;
+	}
+	
+	.wp-block-navigation {
+		flex-shrink: 0;
+		min-width: fit-content;
+	}
+	
+	/* Note: alignfull header group fixes removed */
+	
+	/* Mobile columns adjustments */
+	.wp-block-columns {
+		flex-direction: column;
+	}
+	
+	.wp-block-column {
+		flex-basis: 100%;
+		margin-bottom: 1rem;
+	}
+	
+	/* Mobile social links adjustments */
+	.wp-block-social-links {
+		justify-content: center;
+	}
+	
+	/* Mobile comments adjustments */
+	.wp-block-comments {
+		padding: 1rem;
+	}
+	
+	.wp-block-comment-template {
+		margin-bottom: 1rem;
+		border: none !important;
+		box-shadow: none !important;
 	}
 	
 	/* Reduce border width on mobile for better proportions */
@@ -632,7 +711,7 @@ img {
 	.wp-block-latest-posts:not([style*="box-shadow"]),
 	.wp-block-latest-comments:not([style*="box-shadow"]),
 	.wp-block-rss:not([style*="box-shadow"]) {
-		box-shadow: 4px 4px 0 #000000 !important;
+		box-shadow: 4px 4px 0 var(--neo-shadow-primary) !important;
 	}
 	
 	/* Button responsive adjustments */
@@ -646,7 +725,24 @@ img {
 	/* Images responsive */
 	img {
 		border-width: 2px !important;
-		box-shadow: 4px 4px 0 #000000 !important;
+		box-shadow: 4px 4px 0 var(--neo-shadow-primary) !important;
+	}
+	
+	/* Separator responsive adjustments */
+	.wp-block-separator {
+		margin: 1.5rem 0 !important;
+		border-top: 1px solid #ccc !important;
+	}
+	
+	.wp-block-separator.is-style-wide {
+		margin: 2rem 0 !important;
+		border-top: 1px solid #ccc !important;
+	}
+	
+	.wp-block-separator.is-style-dots::before {
+		font-size: 1.2rem !important;
+		letter-spacing: 1.5rem !important;
+		color: #ccc !important;
 	}
 }
 
@@ -682,7 +778,7 @@ img {
 	.wp-block-latest-posts:not([style*="box-shadow"]),
 	.wp-block-latest-comments:not([style*="box-shadow"]),
 	.wp-block-rss:not([style*="box-shadow"]) {
-		box-shadow: 6px 6px 0 #000000;
+		box-shadow: 6px 6px 0 var(--neo-shadow-primary);
 	}
 	
 	/* Tablet padding adjustments */
@@ -716,6 +812,23 @@ img {
 	.wp-block-latest-comments,
 	.wp-block-rss {
 		padding: 1.5rem;
+	}
+	
+	/* Separator tablet adjustments */
+	.wp-block-separator {
+		margin: 2.5rem 0 !important;
+		border-top: 1px solid #ccc !important;
+	}
+	
+	.wp-block-separator.is-style-wide {
+		margin: 3rem 0 !important;
+		border-top: 2px solid #ccc !important;
+	}
+	
+	.wp-block-separator.is-style-dots::before {
+		font-size: 1.4rem !important;
+		letter-spacing: 1.8rem !important;
+		color: #ccc !important;
 	}
 }
 
@@ -751,7 +864,24 @@ img {
 	.wp-block-latest-posts:not([style*="box-shadow"]),
 	.wp-block-latest-comments:not([style*="box-shadow"]),
 	.wp-block-rss:not([style*="box-shadow"]) {
-		box-shadow: 10px 10px 0 #000000;
+		box-shadow: 10px 10px 0 var(--neo-shadow-primary);
+	}
+	
+	/* Separator large screen adjustments */
+	.wp-block-separator {
+		margin: 3.5rem 0 !important;
+		border-top: 1px solid #ccc !important;
+	}
+	
+	.wp-block-separator.is-style-wide {
+		margin: 4rem 0 !important;
+		border-top: 2px solid #ccc !important;
+	}
+	
+	.wp-block-separator.is-style-dots::before {
+		font-size: 1.8rem !important;
+		letter-spacing: 2.5rem !important;
+		color: #ccc !important;
 	}
 }
 
@@ -780,7 +910,7 @@ footer {
 	background: transparent !important;
 }
 
-/* Spacer and Separator blocks - WordPress 2025 defaults, no NeoBrutalism */
+/* Spacer and Separator blocks - Clean, no NeoBrutalism styling */
 .wp-block-spacer {
 	border: none !important;
 	box-shadow: none !important;
@@ -789,31 +919,44 @@ footer {
 	margin: 0 !important;
 }
 
+/* Comment template - Clean, no NeoBrutalism styling */
+.wp-block-comment-template {
+	border: none !important;
+	box-shadow: none !important;
+	background: transparent !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Default separator - simple line */
 .wp-block-separator {
 	border: none !important;
 	box-shadow: none !important;
 	background: transparent !important;
 	padding: 0 !important;
 	margin: 2rem 0 !important;
-	border-top: 2px solid #ddd !important;
+	border-top: 1px solid #ccc !important;
 	height: 0 !important;
 	width: 100% !important;
 }
 
+/* Wide separator - thicker line */
 .wp-block-separator.is-style-wide {
-	border-top: 2px solid #ddd !important;
+	border-top: 2px solid #ccc !important;
 	margin: 3rem 0 !important;
 }
 
+/* Dots separator - centered dots */
 .wp-block-separator.is-style-dots {
 	border: none !important;
 	text-align: center !important;
 	line-height: 1 !important;
+	height: auto !important;
 }
 
 .wp-block-separator.is-style-dots::before {
-	content: "···" !important;
-	color: #ddd !important;
+	content: "•••" !important;
+	color: #ccc !important;
 	font-size: 1.5rem !important;
 	letter-spacing: 2rem !important;
 }
@@ -898,6 +1041,53 @@ footer {
 .wp-block-embed {
 	margin-bottom: 2rem;
 	padding: 1rem;
+}
+
+/* Featured images - 100% width, half height, object-fit cover */
+.wp-block-post-content .wp-block-post-featured-image {
+	width: 100% !important;
+	height: 50vh !important;
+	max-height: 50vh !important;
+	overflow: hidden !important;
+	border: none !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	display: block !important;
+}
+
+.wp-block-post-content .wp-block-post-featured-image img {
+	width: 100% !important;
+	height: 100% !important;
+	max-height: 100% !important;
+	object-fit: cover !important;
+	object-position: center !important;
+	border: none !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	display: block !important;
+}
+
+/* Override any global img styles for featured images */
+.wp-block-post-content .wp-block-post-featured-image img,
+.wp-block-post-content .wp-block-post-featured-image a img {
+	border: none !important;
+	box-shadow: none !important;
+	height: 100% !important;
+	max-height: 100% !important;
+	object-fit: cover !important;
+}
+
+/* Force featured image height - override everything */
+.wp-block-post-featured-image img {
+	max-height: 500px !important;
+	object-fit: cover !important;
+}
+
+/* Post title margin */
+h1.wp-block-post-title.has-huge-font-size {
+	margin-bottom: 20px;
 }
 
 /* Interactive blocks - Comfortable spacing */
@@ -1008,4 +1198,68 @@ footer {
 	text-transform: uppercase !important;
 	letter-spacing: 0.15em !important;
 	padding: 1.2rem 2.5rem !important;
+}
+
+/* Accessibility Focus Management */
+*:focus {
+	outline: var(--neo-focus-outline);
+	outline-offset: var(--neo-focus-offset);
+}
+
+/* Remove focus outline for mouse users, keep for keyboard users */
+.js-focus-visible *:focus:not(.focus-visible) {
+	outline: none;
+}
+
+/* Enhanced focus for interactive elements */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+	outline: var(--neo-focus-outline);
+	outline-offset: var(--neo-focus-offset);
+}
+
+/* Focus styles for WordPress blocks */
+.wp-block-button__link:focus,
+.wp-block-navigation a:focus,
+.wp-block-search__button:focus,
+.wp-block-file__button:focus {
+	outline: var(--neo-focus-outline);
+	outline-offset: var(--neo-focus-offset);
+}
+
+/* Screen reader only content */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	:root {
+		--neo-focus-color: #0000ff;
+		--neo-focus-outline: 4px solid var(--neo-focus-color);
+	}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
