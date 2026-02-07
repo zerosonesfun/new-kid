@@ -7,7 +7,7 @@ Description: New Kid with blocks, let's rock! A NeoBrutalism block theme.
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 5.7
-Version: 1.1.4
+Version: 1.1.5
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: new-kid
@@ -747,12 +747,134 @@ textarea {
 	padding: 12px;
 }
 
+/* Neo-brutalism: radio and checkbox */
+input[type="radio"],
+input[type="checkbox"] {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 1.25rem;
+	height: 1.25rem;
+	border: 3px solid var(--neo-border-primary);
+	box-shadow: 3px 3px 0 var(--neo-shadow-primary);
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
+	vertical-align: middle;
+	margin: 0 0.5rem 0 0;
+	transition: box-shadow 0.1s ease, transform 0.1s ease;
+}
+
+input[type="radio"] {
+	border-radius: 50%;
+}
+
+input[type="radio"]:checked {
+	background: var(--neo-border-primary);
+	box-shadow: inset 0 0 0 3px var(--neo-bg-primary);
+}
+
+input[type="checkbox"]:checked {
+	background: var(--neo-border-primary);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='square'%3E%3Cpolyline points='5 12 10 17 19 6'%3E%3C/polyline%3E%3C/svg%3E");
+	background-size: 0.9em 0.9em;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+input[type="radio"]:hover,
+input[type="checkbox"]:hover {
+	box-shadow: 2px 2px 0 var(--neo-shadow-primary);
+	transform: translate(1px, 1px);
+}
+
+/* Neo-brutalism: select */
+select {
+	border: 3px solid var(--neo-border-primary);
+	box-shadow: 4px 4px 0 var(--neo-shadow-primary);
+	font-family: 'Courier New', monospace;
+	font-weight: bold;
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
+	padding: 10px 32px 10px 12px;
+	min-height: 44px;
+	cursor: pointer;
+	appearance: none;
+	-webkit-appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='3' stroke-linecap='square'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+}
+
+/* Neo-brutalism: submit and reset buttons */
+input[type="submit"],
+input[type="reset"] {
+	border: 4px solid var(--neo-border-primary);
+	box-shadow: 8px 8px 0 var(--neo-shadow-primary);
+	font-family: Impact, 'Arial Black', sans-serif;
+	font-weight: 900;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
+	padding: 1rem 2rem;
+	cursor: pointer;
+	transition: box-shadow 0.1s ease, transform 0.1s ease;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+	box-shadow: 4px 4px 0 var(--neo-shadow-primary);
+	transform: translate(4px, 4px);
+}
+
+input[type="reset"]:hover {
+	background: var(--neo-bg-secondary);
+}
+
+/* Neo-brutalism: file upload field and button */
+input[type="file"] {
+	border: 3px solid var(--neo-border-primary);
+	box-shadow: 4px 4px 0 var(--neo-shadow-primary);
+	font-family: 'Courier New', monospace;
+	font-weight: bold;
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
+	padding: 10px 12px;
+	max-width: 100%;
+}
+
+input[type="file"]::file-selector-button {
+	border: 3px solid var(--neo-border-primary);
+	box-shadow: 4px 4px 0 var(--neo-shadow-primary);
+	font-family: Impact, 'Arial Black', sans-serif;
+	font-weight: 900;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	background: var(--neo-bg-primary);
+	color: var(--neo-text-primary);
+	padding: 0.5rem 1rem;
+	margin-inline-end: 12px;
+	cursor: pointer;
+	transition: box-shadow 0.1s ease, transform 0.1s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+	box-shadow: 2px 2px 0 var(--neo-shadow-primary);
+	transform: translate(2px, 2px);
+}
+
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
 	outline: var(--neo-focus-outline);
 	outline-offset: var(--neo-focus-offset);
 	box-shadow: 4px 4px 0 #ff0000;
 	border-color: #ff0000;
+}
+
+input[type="submit"]:focus,
+input[type="reset"]:focus {
+	box-shadow: 6px 6px 0 var(--neo-focus-color);
+	border-color: var(--neo-focus-color);
 }
 
 /* Dark mode form element adjustments */
@@ -768,9 +890,67 @@ textarea:focus {
 		box-shadow: 4px 4px 0 var(--neo-shadow-primary);
 	}
 	
+	input[type="radio"],
+	input[type="checkbox"] {
+		background: var(--neo-bg-secondary);
+		border-color: var(--neo-border-primary);
+		box-shadow: 3px 3px 0 var(--neo-shadow-primary);
+	}
+	
+	input[type="radio"]:checked {
+		background: var(--neo-border-primary);
+		box-shadow: inset 0 0 0 3px var(--neo-bg-secondary);
+	}
+	
+	input[type="checkbox"]:checked {
+		background: var(--neo-border-primary);
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='square'%3E%3Cpolyline points='5 12 10 17 19 6'%3E%3C/polyline%3E%3C/svg%3E");
+	}
+	
+	select {
+		background: var(--neo-bg-secondary);
+		color: var(--neo-text-primary);
+		border-color: var(--neo-border-primary);
+		box-shadow: 4px 4px 0 var(--neo-shadow-primary);
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='square'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+	}
+	
+	input[type="submit"],
+	input[type="reset"] {
+		background: var(--neo-bg-secondary);
+		color: var(--neo-text-primary);
+		border-color: var(--neo-border-primary);
+		box-shadow: 8px 8px 0 var(--neo-shadow-primary);
+	}
+	
+	input[type="reset"]:hover {
+		background: var(--neo-bg-primary);
+	}
+	
+	input[type="file"] {
+		background: var(--neo-bg-secondary);
+		color: var(--neo-text-primary);
+		border-color: var(--neo-border-primary);
+		box-shadow: 4px 4px 0 var(--neo-shadow-primary);
+	}
+	
+	input[type="file"]::file-selector-button {
+		background: var(--neo-bg-secondary);
+		color: var(--neo-text-primary);
+		border-color: var(--neo-border-primary);
+		box-shadow: 4px 4px 0 var(--neo-shadow-primary);
+	}
+	
 	input:focus,
-	textarea:focus {
+	textarea:focus,
+	select:focus {
 		box-shadow: 4px 4px 0 var(--neo-focus-color);
+		border-color: var(--neo-focus-color);
+	}
+	
+	input[type="submit"]:focus,
+	input[type="reset"]:focus {
+		box-shadow: 6px 6px 0 var(--neo-focus-color);
 		border-color: var(--neo-focus-color);
 	}
 }
