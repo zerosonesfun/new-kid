@@ -1,11 +1,11 @@
 == New Kid ==
 
 Contributors: Billy Wilcosky
-Tags: accessibility-ready, block-theme, full-site-editing, neo-brutalism, bold, colorful, modern, custom-colors, custom-spacing, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready, wide-blocks
+Tags: block-theme, full-site-editing, neo-brutalism, bold, colorful, modern, custom-colors, custom-spacing, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready, wide-blocks
 Requires at least: 6.8
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.7
-Stable tag: 1.0
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,44 @@ The theme includes a carefully curated color palette inspired by NeoBrutalism:
 
 == Changelog ==
 
+= 1.1.4 =
+* Schema.org JSON-LD (BlogPosting) for single blog post pages
+
+= 1.1.3 =
+* Tested with WordPress version 6.9
+
+= 1.1.2 =
+* Fixed button font-size not working in block editor
+* Removed mobile font-size override that prevented font-size changes from block editor settings
+
+= 1.1.1 =
+* Fixed <pre> responsiveness
+* Fixed <img> responsiveness
+* Other minor responsiveness adjustments
+
+= 1.1.0 =
+* Fixed comments block background in dark mode (now uses dark background)
+* Fixed comments block border and shadow in dark mode (now white instead of black)
+* Fixed comment form background, border, and shadow styling in dark mode
+* Improved overall comments section dark mode compatibility
+
+= 1.0.9 =
+* Minor adjustments
+
+= 1.0.8 =
+* Added proper, standard typography spacing for paragraphs, headings, and lists
+* Improved content readability with industry-standard margins and padding
+* Enhanced nested list indentation and spacing
+* Fixed heading hierarchy spacing (H1-H6) following typography best practices
+
+= 1.0.7 =
+* Fixed focus background color in dark mode (changed from yellow-green to sky blue)
+* Improved focus state visibility and accessibility
+* Added !important declarations to ensure dark mode focus styles override WordPress defaults
+
+= 1.0.5 =
+* Enhanced dark mode with significantly improved contrast and visibility
+
 = 1.0 =
 * Initial release
 * Full Site Editing support
@@ -126,7 +164,7 @@ Users can disable Google Fonts by removing the font enqueue in functions.php if 
 **Icons:**
 * No external icon libraries used
 
-== Copyright ==
+== Copyright / Licenses ==
 
 New Kid WordPress Theme, (C) 2025 Billy Wilcosky
 New Kid is distributed under the terms of the GNU GPL.
@@ -141,3 +179,6 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
+NeoBrutalismCSS is under the MIT License and was created by Matias Fandiño.
+NeoBrutalismCSS License URI: https://github.com/matifandy8/NeoBrutalismCSS/blob/main/LICENCE.TXT
+NeoBrutalismCSS Source URI: https://github.com/matifandy8/NeoBrutalismCSS

@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hide pagination if there aren't enough posts
     hidePaginationIfNotNeeded();
     
+    // Hide empty group blocks
+    hideEmptyGroupBlocks();
+    
 });
 
 /**
@@ -177,5 +180,31 @@ function hidePaginationIfNotNeeded() {
             paginationGroup.style.display = 'none';
         }
     }
+}
+
+/**
+ * Hide empty group blocks
+ * Finds all .wp-block-group elements that have no content and hides them
+ */
+function hideEmptyGroupBlocks() {
+    // Find all group blocks
+    const groupBlocks = document.querySelectorAll('.wp-block-group');
+    
+    groupBlocks.forEach(function(groupBlock) {
+        // Get the text content and trim whitespace
+        const textContent = groupBlock.textContent.trim();
+        
+        // Check if the group has any child elements with actual content
+        const hasImages = groupBlock.querySelectorAll('img').length > 0;
+        const hasVideos = groupBlock.querySelectorAll('video').length > 0;
+        const hasIframes = groupBlock.querySelectorAll('iframe').length > 0;
+        const hasButtons = groupBlock.querySelectorAll('.wp-block-button').length > 0;
+        const hasSVGs = groupBlock.querySelectorAll('svg').length > 0;
+        
+        // If the group has no text content and no media/interactive elements, hide it
+        if (textContent === '' && !hasImages && !hasVideos && !hasIframes && !hasButtons && !hasSVGs) {
+            groupBlock.style.display = 'none';
+        }
+    });
 }
 

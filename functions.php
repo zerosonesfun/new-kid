@@ -274,6 +274,87 @@ function new_kid_accessibility_improvements() {
 add_action('wp_head', 'new_kid_accessibility_improvements');
 
 /**
+ * Output Schema.org JSON-LD for single blog post pages
+ */
+function new_kid_single_post_schema() {
+    if ( ! is_singular( 'post' ) ) {
+        return;
+    }
+
+    $post = get_queried_object();
+    if ( ! $post || ! ( $post instanceof WP_Post ) ) {
+        return;
+    }
+
+    $schema = array(
+        '@context'  => 'https://schema.org',
+        '@type'     => 'BlogPosting',
+        'headline'  => get_the_title( $post ),
+        'datePublished' => get_the_date( 'c', $post ),
+        'dateModified'  => get_the_modified_date( 'c', $post ),
+        'author'    => array(
+            '@type' => 'Person',
+            'name'  => get_the_author_meta( 'display_name', $post->post_author ),
+            'url'   => get_author_posts_url( $post->post_author ),
+        ),
+        'publisher' => new_kid_schema_publisher_array(),
+        'mainEntityOfPage' => array(
+            '@type' => 'WebPage',
+            '@id'   => get_permalink( $post ),
+        ),
+    );
+
+    $thumbnail_id = get_post_thumbnail_id( $post );
+    if ( $thumbnail_id ) {
+        $image_url = wp_get_attachment_image_url( $thumbnail_id, 'full' );
+        if ( $image_url ) {
+            $schema['image'] = $image_url;
+        }
+    }
+
+    $excerpt = get_the_excerpt( $post );
+    if ( $excerpt ) {
+        $schema['description'] = $excerpt;
+    }
+
+    echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_HEX_TAG | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+}
+
+/**
+ * Build publisher array for Schema.org (name + logo only when available)
+ */
+function new_kid_schema_publisher_array() {
+    $publisher = array(
+        '@type' => 'Organization',
+        'name'  => get_bloginfo( 'name' ),
+    );
+    $logo = new_kid_schema_publisher_logo();
+    if ( $logo ) {
+        $publisher['logo'] = $logo;
+    }
+    return $publisher;
+}
+
+/**
+ * Get publisher logo for Schema.org (custom logo or site icon), or null if none
+ */
+function new_kid_schema_publisher_logo() {
+    $custom_logo_id = get_theme_mod( 'custom_logo' );
+    if ( $custom_logo_id ) {
+        $url = wp_get_attachment_image_url( $custom_logo_id, 'full' );
+        if ( $url ) {
+            return array( '@type' => 'ImageObject', 'url' => $url );
+        }
+    }
+    $site_icon_url = get_site_icon_url( 512 );
+    if ( $site_icon_url ) {
+        return array( '@type' => 'ImageObject', 'url' => $site_icon_url );
+    }
+    return null;
+}
+add_action( 'wp_head', 'new_kid_single_post_schema', 5 );
+
+/**
  * Register block patterns for translatable content
  */
 function new_kid_register_block_patterns() {
@@ -578,14 +659,7 @@ function new_kid_enqueue_styles() {
     $style_file = get_template_directory() . '/style.css';
     $style_version = file_exists($style_file) ? filemtime($style_file) : wp_get_theme()->get('Version');
     
-    wp_enqueue_style(
-        'new-kid-style',
-        get_stylesheet_uri(),
-        array(),
-        $style_version
-    );
-    
-    // NeoBrutalism CSS file
+    // NeoBrutalism CSS file - enqueued first as dependency
     $neo_css_file = get_template_directory() . '/assets/css/neobrutalismcss.css';
     $neo_css_version = file_exists($neo_css_file) ? filemtime($neo_css_file) : wp_get_theme()->get('Version');
     
@@ -594,6 +668,14 @@ function new_kid_enqueue_styles() {
         get_template_directory_uri() . '/assets/css/neobrutalismcss.css',
         array(),
         $neo_css_version
+    );
+    
+    // Main theme stylesheet - depends on NeoBrutalismCSS
+    wp_enqueue_style(
+        'new-kid-style',
+        get_stylesheet_uri(),
+        array('neo-brutalism-css'),
+        $style_version
     );
     
 }
