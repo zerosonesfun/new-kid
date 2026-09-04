@@ -231,9 +231,6 @@
 					"fontWeight": "900",
 					"textTransform": "uppercase",
 					"letterSpacing": "2px"
-				},
-				"color": {
-					"text": "var(--wp--preset--color--black)"
 				}
 			},
 			"link": {
@@ -262,9 +259,6 @@
 					"fontWeight": "900",
 					"textTransform": "uppercase",
 					"letterSpacing": "3px"
-				},
-				"color": {
-					"text": "var(--wp--preset--color--black)"
 				}
 			},
 			"core/post-title": {
@@ -274,9 +268,6 @@
 					"fontWeight": "900",
 					"textTransform": "uppercase",
 					"letterSpacing": "2px"
-				},
-				"color": {
-					"text": "var(--wp--preset--color--black)"
 				}
 			},
 			"core/navigation": {
@@ -803,9 +794,6 @@
 					"fontWeight": "900",
 					"textTransform": "uppercase",
 					"letterSpacing": "3px"
-				},
-				"color": {
-					"text": "var(--wp--preset--color--black)"
 				}
 			},
 			"core/query-no-results": {

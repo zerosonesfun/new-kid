@@ -7,7 +7,7 @@ Description: New Kid with blocks, let's rock! A NeoBrutalism block theme.
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 5.7
-Version: 1.1.10
+Version: 1.1.11
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: new-kid
@@ -728,38 +728,64 @@ a:not(.wp-block-button__link):not(.wp-block-site-logo):not(.wp-block-post-featur
 		color: #000000 !important;
 	}
 
-	/* Hamburger / overlay menu — core defaults to white bg; match dark theme */
-	.wp-block-navigation__responsive-container,
-	.wp-block-navigation__responsive-container.is-menu-open,
-	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content,
-	.wp-block-navigation__responsive-dialog {
-		background-color: var(--neo-bg-primary) !important;
-		background: var(--neo-bg-primary) !important;
-		color: var(--neo-text-primary) !important;
+	/* Hamburger / overlay menu — beat core #fff and white inherit when modal is open */
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open.has-modal-open,
+	.wp-block-navigation__responsive-container.is-menu-open.has-modal-open,
+	.wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open:not(.disable-default-overlay),
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-close,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open.has-white-background-color,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open.has-background {
+		background-color: var(--neo-bg-primary, #1a1a1a) !important;
+		background: var(--neo-bg-primary, #1a1a1a) !important;
+		color: var(--neo-text-primary, #ffffff) !important;
 	}
 
-	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item a,
-	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item,
-	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-icon {
-		color: var(--neo-text-primary) !important;
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item a,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__label,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-icon,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open.has-white-color,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open.has-text-color {
+		color: var(--neo-text-primary, #ffffff) !important;
 	}
 
 	.wp-block-navigation__responsive-container-open,
-	.wp-block-navigation__responsive-container-close {
-		color: var(--neo-text-primary) !important;
+	.wp-block-navigation__responsive-container-close,
+	html.has-modal-open .wp-block-navigation__responsive-container-close {
+		color: var(--neo-text-primary, #ffffff) !important;
 		background: transparent !important;
 	}
 
 	.wp-block-navigation__responsive-container-open svg,
-	.wp-block-navigation__responsive-container-close svg {
-		fill: var(--neo-text-primary) !important;
-		stroke: var(--neo-text-primary) !important;
-		color: var(--neo-text-primary) !important;
+	.wp-block-navigation__responsive-container-close svg,
+	html.has-modal-open .wp-block-navigation__responsive-container-close svg {
+		fill: var(--neo-text-primary, #ffffff) !important;
+		stroke: var(--neo-text-primary, #ffffff) !important;
+		color: var(--neo-text-primary, #ffffff) !important;
 	}
 
-	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item a:hover {
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item a:hover,
+	html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content:hover {
 		background-color: var(--neo-highlight-bg) !important;
 		color: #000000 !important;
+	}
+
+	/* Titles/headings: theme.json locks these to preset black which never adapts */
+	.wp-block-post-title,
+	.wp-block-site-title,
+	.wp-block-query-title,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	.wp-block-heading {
+		color: var(--neo-text-primary, #ffffff) !important;
 	}
 }
 
