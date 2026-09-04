@@ -5,7 +5,7 @@ Tags: block-theme, full-site-editing, neo-brutalism, bold, colorful, modern, cus
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 5.7
-Stable tag: 1.1.8
+Stable tag: 1.1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,9 @@ The theme includes a carefully curated color palette inspired by NeoBrutalism:
 * Special fonts: Stint Ultra Expanded, Lexend Mega, Proza Libre, Public Sans
 
 == Changelog ==
+
+= 1.1.9 =
+* Fixed malformed separator block markup in page.html and page-wide.html templates (orphaned closing tag)
 
 = 1.1.8 =
 * Added proper Copyright notices (Copyright 2025, 2026 Billy Wilcosky) to theme source files and documentation
