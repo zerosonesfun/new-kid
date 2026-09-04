@@ -5,14 +5,33 @@ Author: Billy Wilcosky
 Author URI: https://wilcosky.com
 Description: New Kid with blocks, let's rock! A NeoBrutalism block theme.
 Requires at least: 6.8
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 5.7
-Version: 1.1.6
+Version: 1.1.8
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: new-kid
 Tags: full-site-editing, custom-colors, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready, wide-blocks
 */
+
+/*
+ * Copyright 2025, 2026 Billy Wilcosky
+ *
+ * This file is part of New Kid.
+ *
+ * New Kid is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * New Kid is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with New Kid. If not, see <https://www.gnu.org/licenses/>.
+ */
 
 /* NeoBrutalismCSS is now enqueued via wp_enqueue_style() in functions.php */
 
@@ -1487,6 +1506,35 @@ footer {
 	.wp-block-comment-template {
 		border-color: var(--neo-border-primary) !important;
 		color: var(--neo-text-primary) !important;
+	}
+}
+
+/* Dark mode: single post previous/next navigation
+   Overrides theme.json white/black presets that do not adapt to prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+	.wp-block-post-navigation-link {
+		background: var(--neo-bg-secondary) !important;
+		background-color: var(--neo-bg-secondary) !important;
+		border-color: var(--neo-border-primary) !important;
+		box-shadow: 4px 4px 0 var(--neo-shadow-primary) !important;
+		color: var(--neo-text-primary) !important;
+	}
+	
+	.wp-block-post-navigation-link a,
+	.wp-block-post-navigation-link .post-navigation-link__label,
+	.wp-block-post-navigation-link .post-navigation-link__title {
+		color: var(--neo-text-primary) !important;
+	}
+	
+	.wp-block-post-navigation-link:hover,
+	.wp-block-post-navigation-link a:hover {
+		background-color: var(--neo-highlight-bg) !important;
+		color: #000000 !important;
+	}
+	
+	.wp-block-post-navigation-link a:hover .post-navigation-link__label,
+	.wp-block-post-navigation-link a:hover .post-navigation-link__title {
+		color: #000000 !important;
 	}
 }
 

@@ -1,4 +1,15 @@
 @charset "UTF-8";
+/*
+ * Copyright 2024 MATIAS FANDIÑO
+ *
+ * NeoBrutalismCSS is licensed under the MIT License.
+ * Permission notice and full license text:
+ * https://github.com/matifandy8/NeoBrutalismCSS/blob/main/LICENCE.TXT
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 /* Box sizing border-box reset */
 *, *::before, *::after {
   box-sizing: border-box;

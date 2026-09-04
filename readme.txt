@@ -3,9 +3,9 @@
 Contributors: Billy Wilcosky
 Tags: block-theme, full-site-editing, neo-brutalism, bold, colorful, modern, custom-colors, custom-spacing, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready, wide-blocks
 Requires at least: 6.8
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 5.7
-Stable tag: 1.1.6
+Stable tag: 1.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,14 @@ The theme includes a carefully curated color palette inspired by NeoBrutalism:
 * Special fonts: Stint Ultra Expanded, Lexend Mega, Proza Libre, Public Sans
 
 == Changelog ==
+
+= 1.1.8 =
+* Added proper Copyright notices (Copyright 2025, 2026 Billy Wilcosky) to theme source files and documentation
+* Preserved NeoBrutalismCSS copyright (Copyright 2024 MATIAS FANDIÑO) in the bundled CSS
+
+= 1.1.7 =
+* Fixed single post previous/next navigation not adapting to dark mode
+* Tested up to WordPress 7.1
 
 = 1.1.6 =
 * Fixed select box dropdown arrow repeating; single chevron now displays on the right in light and dark mode
@@ -173,10 +181,9 @@ Users can disable Google Fonts by removing the font enqueue in functions.php if 
 
 == Copyright / Licenses ==
 
-New Kid WordPress Theme, (C) 2025 Billy Wilcosky
-New Kid is distributed under the terms of the GNU GPL.
+Copyright 2025, 2026 Billy Wilcosky
 
-This program is free software: you can redistribute it and/or modify
+New Kid WordPress Theme is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 (at your option) any later version.
@@ -186,6 +193,22 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
-NeoBrutalismCSS is under the MIT License and was created by Matias Fandiño.
-NeoBrutalismCSS License URI: https://github.com/matifandy8/NeoBrutalismCSS/blob/main/LICENCE.TXT
-NeoBrutalismCSS Source URI: https://github.com/matifandy8/NeoBrutalismCSS
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+Copyright years list each year in which a release of this theme was finished
+preparing for distribution (2025 and 2026).
+
+Bundled third-party resources retain their original copyright notices and licenses:
+
+NeoBrutalismCSS
+Copyright 2024 MATIAS FANDIÑO
+License: MIT License
+License URI: https://github.com/matifandy8/NeoBrutalismCSS/blob/main/LICENCE.TXT
+Source URI: https://github.com/matifandy8/NeoBrutalismCSS
+
+Fonts (Google Fonts; SIL Open Font License):
+* Stint Ultra Expanded
+* Lexend Mega
+* Proza Libre
+* Public Sans

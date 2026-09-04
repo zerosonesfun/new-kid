@@ -1,4 +1,4 @@
-# Copyright (C) 2025 Billy Wilcosky
+# Copyright 2025, 2026 Billy Wilcosky
 # This file is distributed under the same license as the New Kid package.
 msgid ""
 msgstr ""
