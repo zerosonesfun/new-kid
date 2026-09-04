@@ -662,8 +662,10 @@ add_action('enqueue_block_editor_assets', 'new_kid_enqueue_block_editor_scripts'
  * Enqueue editor styles for the block editor
  */
 function new_kid_editor_styles() {
-    // Add the main stylesheet to the editor
+    // Main theme styles in the editor (includes prefers-color-scheme rules)
     add_editor_style('style.css');
+    // Keep canvas readable when OS is dark but admin editor stays light
+    add_editor_style('assets/css/editor-canvas.css');
 }
 add_action('after_setup_theme', 'new_kid_editor_styles');
 

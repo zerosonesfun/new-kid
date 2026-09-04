@@ -1,0 +1,72 @@
+/**
+ * Copyright 2025, 2026 Billy Wilcosky
+ *
+ * This file is part of New Kid.
+ *
+ * Keep the block editor canvas readable when the OS prefers dark mode.
+ * Frontend dark styles still apply on the public site; the admin editor
+ * chrome stays light, so canvas text must stay dark on a light background.
+ */
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--neo-bg-primary: #ffffff;
+		--neo-bg-secondary: #f5f5f5;
+		--neo-text-primary: #000000;
+		--neo-text-secondary: #333333;
+		--neo-border-primary: #000000;
+		--neo-shadow-primary: #000000;
+		--neo-highlight-bg: #fdfd96;
+		--neo-alert-bg: #ff5733;
+		--neo-success-bg: #40d39c;
+		--neo-code-bg: #000000;
+		--neo-code-text: #40d39c;
+		--neo-focus-color: #0066cc;
+	}
+
+	html,
+	body {
+		background-color: #ffffff !important;
+		color: #000000 !important;
+	}
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	li,
+	blockquote,
+	figcaption,
+	.wp-block-paragraph,
+	.wp-block-heading,
+	.wp-block-list,
+	.wp-block-quote,
+	.wp-block-pullquote,
+	.wp-block-verse,
+	.wp-block-table,
+	.wp-block-post-title,
+	.wp-block-post-content,
+	.wp-block-post-excerpt,
+	.wp-block-post-author,
+	.wp-block-post-date,
+	.wp-block-post-terms,
+	.wp-block-site-title,
+	.wp-block-site-tagline,
+	.wp-block-navigation,
+	.is-root-container {
+		color: #000000 !important;
+	}
+
+	a:not(.wp-block-button__link):not(.wp-block-site-logo):not(.wp-block-post-featured-image__link) {
+		color: #000000 !important;
+	}
+
+	.wp-block-button .wp-block-button__link {
+		background: #ffffff !important;
+		color: #000000 !important;
+		border-color: #000000 !important;
+	}
+}
